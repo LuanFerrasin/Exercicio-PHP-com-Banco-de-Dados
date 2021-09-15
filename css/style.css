@@ -208,5 +208,10 @@ input[type=email]:hover{
 .destaque{
     font-weight: bold;
 }
+#baixo{
+    text-align: center;
+    font-size: larger;
+    font-style: italic;
+}
 
 

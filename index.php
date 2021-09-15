@@ -25,7 +25,7 @@ require_once('bd/conexaoMySql.php');
             </div>
             <div id="cadastroInformacoes">
         
-                <form action="" name="frmCadastro" method="post" >
+                <form action="controles/recebeDadosClientes.php" name="frmCadastro" method="post" >
                    
                     <div class="campos">
                         <div class="cadastroInformacoesPessoais">
@@ -116,5 +116,7 @@ require_once('bd/conexaoMySql.php');
                 </tr>
             </table>
         </div>
+        <div id="baixo"> <span>Copyright &copy;2021 | Luan Ferrasin </span>
+      </div>
     </body>
 </html>
