@@ -1,3 +1,15 @@
+<?php
+
+require_once('bd/conexaoMySql.php');
+ conexaoMySql();
+
+
+
+
+
+
+?>
+
 <!DOCTYPE>
 <html lang="pt-br">
     <head>
