@@ -12,7 +12,7 @@
 function conexaoMySql()
 {
 
-    require_once('functions/config.php');
+    require_once('../functions/config.php');
 
 
     //Declaração de Variaveis para conexão com o BD    

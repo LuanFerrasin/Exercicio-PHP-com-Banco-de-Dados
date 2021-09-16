@@ -32,7 +32,7 @@ require_once('bd/conexaoMySql.php');
                             <label> Nome: </label>
                         </div>
                         <div class="cadastroEntradaDeDados">
-                            <input type="text" name="txtNome" value="" placeholder="Digite seu Nome">
+                            <input type="text" name="txtNome" value="" placeholder="Digite seu Nome" maxlength="100">
                         </div>
                     </div>
                     <div class="campos">
@@ -40,7 +40,7 @@ require_once('bd/conexaoMySql.php');
                             <label> RG: </label>
                         </div>
                         <div class="cadastroEntradaDeDados">
-                            <input type="text" name="txtRg" value="" placeholder="Digite seu Rg">
+                            <input type="text" name="txtRg" value="" placeholder="Digite seu Rg" maxlength="20">
                         </div>
                     </div>
                     <div class="campos">
@@ -48,7 +48,7 @@ require_once('bd/conexaoMySql.php');
                             <label> Cpf: </label>
                         </div>
                         <div class="cadastroEntradaDeDados">
-                            <input type="text" name="txtCpf" value="" placeholder="Digite seu Cpf">
+                            <input type="text" name="txtCpf" value="" placeholder="Digite seu Cpf" maxlength="20">
                         </div>
                     </div>
                      <div class="campos">
@@ -56,7 +56,7 @@ require_once('bd/conexaoMySql.php');
                             <label> Telefone: </label>
                         </div>
                         <div class="cadastroEntradaDeDados">
-                            <input type="tel" name="txtTelefone" value="" placeholder="Digite seu Telefone">
+                            <input type="tel" name="txtTelefone" value="" placeholder="Digite seu Telefone" maxlength="20">
                         </div>
                     </div>
                     <div class="campos">
@@ -64,7 +64,7 @@ require_once('bd/conexaoMySql.php');
                             <label> Celular: </label>
                         </div>
                         <div class="cadastroEntradaDeDados">
-                            <input type="tel" name="txtCelular" value="" placeholder="Digite seu Celular">
+                            <input type="tel" name="txtCelular" value="" placeholder="Digite seu Celular" maxlength="20">
                         </div>
                     </div>
                     <div class="campos">
@@ -72,7 +72,7 @@ require_once('bd/conexaoMySql.php');
                             <label> Email: </label>
                         </div>
                         <div class="cadastroEntradaDeDados">
-                            <input type="email" name="txtEmail" value="" placeholder="Digite seu Email">
+                            <input type="email" name="txtEmail" value="" placeholder="Digite seu Email" maxlength="60">
                         </div>
                     </div>
                     <div class="campos">
