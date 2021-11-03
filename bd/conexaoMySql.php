@@ -12,8 +12,6 @@
 function conexaoMySql()
 {
 
-    require_once('../functions/config.php');
-
 
     //Declaração de Variaveis para conexão com o BD    
      $server = (string) BD_SERVER;

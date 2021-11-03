@@ -12,7 +12,8 @@
 
 require_once('../functions/config.php');
 //Import do Arquivo parar inserir no Banco de Dados
-require_once('../bd/inserirCliente.php');
+require_once(SRC.'bd/inserirCliente.php');
+require_once(SRC.'bd/atualizarCliente.php');
 
  //Declarando Variáveis
 $nome = (String) null;
@@ -22,6 +23,13 @@ $telefone = (String) null;
 $celular = (String) null;
 $email = (String) null;
 $obs = (String) null;
+$idEstado = (int) null;
+
+//Validacao para saber se o id do registro está chegando pela URL (modo para editar registro)
+if(isset ($_GET['id']))
+  $id = (int) $_GET['id'];
+else
+  $id = (int) 0;
 
 
 
@@ -37,6 +45,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
   $celular = $_POST['txtCelular'];
   $email = $_POST['txtEmail'];
   $obs = $_POST['txtObs'];
+  $idEstado = $_POST['sltEstado'];
 
   if ($nome == null  || $rg == null || $cpf == null)
     echo("<script>
@@ -64,16 +73,44 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
           "telefone" => $telefone,
           "celular" => $celular,
           "email" => $email,
-          "obs" => $obs
+          "obs" => $obs,
+          "id" => $id,
+          "idEstado" => $idEstado
         );
 
-     
-
-     //Chama a função "Inserir" do arquivo inserirCliente.php e encaminha o array com os dados do
-     inserir($cliente);
-   }
-
-
-
-}
+    //Validação para saber se é para inserir no Registro ou se é para Atualizar o Registro existente no BD 
+    if(strtoupper($_GET['modo']) == 'SALVAR')
+    {
+      // chama a funcao inserir do arquivo  inserirCliente.php
+      if(inserir($cliente))
+        echo("<script>
+        alert('" . BD_MSG_INSERIR . "');
+        window.location.href = '../index.php';
+        </script>
+        ");
+     else
+        echo("<script>
+        alert('" . BD_MSG_ERRO . "');
+        window.history.back();
+        </script>
+        ");
+        
+    }elseif(strtoupper($_GET['modo']) == 'ATUALIZAR')
+    {
+       if (editar($cliente))
+      
+        echo("<script>
+       alert('" . BD_MSG_INSERIR . "');
+        window.location.href = '../index.php';
+        </script>
+        ");
+      else
+        echo("<script>
+       alert('" . BD_MSG_ERRO . "');
+        window.history.back();
+        </script>
+        ");  
+      } 
+    }
+  }
 ?>

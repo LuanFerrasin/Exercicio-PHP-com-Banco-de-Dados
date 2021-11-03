@@ -7,7 +7,7 @@ require_once('../bd/conexaoMySql.php');
 
 /***********************************************************************************
  Objetivo: Inserir dados de Clientes no Banco de Dados
- Data:16/02/2021 
+ Data:16/09/2021 
  Autor: Luan Enzo Simonato Ferrasin
 
  **********************************************************************************/
@@ -26,7 +26,8 @@ require_once('../bd/conexaoMySql.php');
                     telefone,
                     celular,
                     email,
-                    obs
+                    obs,
+                    idEstado
 
                  )
                  values
@@ -36,7 +37,8 @@ require_once('../bd/conexaoMySql.php');
                  '".$arrayCliente['telefone']."',
                  '".$arrayCliente['celular']."',
                  '".$arrayCliente['email']."',
-                 '".$arrayCliente['obs']."'  
+                 '".$arrayCliente['obs']."',
+                 ".$arrayCliente['idEstado']."
 
 
 
@@ -47,10 +49,15 @@ require_once('../bd/conexaoMySql.php');
 
         
         ";
-        //Chamando que estabelece a conexão com o Banco de Dados
-        $conexao = conexaoMySql();
-        // Envia o Script SQL para o Banco de Dados
-        mysqli_query($conexao,$sql);
+        // //Chamando que estabelece a conexão com o Banco de Dados
+         $conexao = conexaoMySql();
+        // // Envia o Script SQL para o Banco de Dados
+         if (mysqli_query($conexao,$sql))
+         return true;
+         else
+         return false;
+
+         
        
     }
 
