@@ -14,7 +14,11 @@ require_once(SRC.'bd/conexaoMySql.php');
 //Retorna todos os Registros Existentes no Banco
 function listar()
 {
-    $sql = "select * from tblcliente order by idcliente desc";
+    $sql = "select tblcliente.*,tblEstado.sigla 
+    from tblcliente 
+        inner join tblEstado 
+        on tblEstado.idEstado = tblcliente.idEstado
+        order by idCliente desc";
 
     $conexao = conexaoMySql();
     // Abre a conexão com o Banco de Dados
@@ -33,7 +37,7 @@ function buscar ($idCliente)
     $sql = "select tblcliente.*,tblEstado.sigla 
         from tblcliente 
             inner join tblEstado 
-            on tblEstado.idestado = tblcliente.idEstado     
+            on tblEstado.idEstado = tblcliente.idEstado     
         where tblcliente.idCliente = ".$idCliente;
 
     $conexao = conexaoMySql();

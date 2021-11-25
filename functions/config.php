@@ -10,14 +10,6 @@
 
 
 
-
-
-
-
-
-
-
-
 //Variaveis e constantes para conexão de Dados com MySql
 const BD_SERVER = 'localhost';
 const BD_USER = 'root';
@@ -55,6 +47,12 @@ const BD_ERRO_EXCLUIR ='Não foi possível excluir os dados, tente novamente!';
 
 
 
+//Constantes para upload de Arquivos
 
+define ('NOME_DIRETORIO_FILE', "arquivos/");
+$extensoesPermitidasFile = array  ("image/png", "image/jpg" , "image/jpeg");
+define('EXTENSOES_PERMITIDAS', $extensoesPermitidasFile);
+
+const TAMANHO_FILE = "5120";
 
 ?>    

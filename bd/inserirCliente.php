@@ -27,7 +27,9 @@ require_once('../bd/conexaoMySql.php');
                     celular,
                     email,
                     obs,
-                    idEstado
+                    idEstado,
+                    foto
+
 
                  )
                  values
@@ -38,7 +40,8 @@ require_once('../bd/conexaoMySql.php');
                  '".$arrayCliente['celular']."',
                  '".$arrayCliente['email']."',
                  '".$arrayCliente['obs']."',
-                 ".$arrayCliente['idEstado']."
+                 ".$arrayCliente['idEstado'].",
+                 '".$arrayCliente['foto']."'
 
 
 

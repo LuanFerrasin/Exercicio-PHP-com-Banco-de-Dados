@@ -18,6 +18,7 @@ $sigla = (string) "Selecione um Item ";
   //Essa variavel será utilizada para definir o modo de manipulação com Banco de Dados(Salvar será feito o insert
   // Se ela estiver atualizar será feito o update)
 $modo = (string) "Salvar";
+$foto = (string) "sem_foto.jpg";
 
 
 
@@ -48,6 +49,7 @@ if(isset($_SESSION['cliente']))
     $obs = $_SESSION['cliente']['obs'];
     $idEstado = $_SESSION['cliente']['idEstado'];
     $sigla = $_SESSION['cliente']['sigla'];
+    $foto = $_SESSION['cliente']['foto'];
     $modo = "Atualizar";
 }
     //Elimina um objeto, variavel da memoria
@@ -121,8 +123,15 @@ if(isset($_SESSION['cliente']))
             <!-- As Variaveis Modo e ID , que foram utilizadas no Action do Form, são responsaveis por encaminhar para a pagina recebeDadosCliente.php duas informações:
                 modo - que é responsavel por definir se é para definir ou atualizar
                 id - que é responsavel por identificar o registro a ser atualizado no Banco de Dados
-            -->
-                <form action="controles/recebeDadosClientes.php?modo=<?=$modo?>&id=<?=$id?>" name="frmCadastro" method="post" >
+
+                enctype="multipart/form-data" é obrigatório usar quando for trabalhar com imagens
+
+                OBS: para trabalhar com a input type="file" é obrigatório utilizar o método POST
+             -->
+
+
+                
+                <form enctype="multipart/form-data" action="controles/recebeDadosClientes.php?modo=<?=$modo?>&id=<?=$id?>&nomeFoto=<?=$foto?>" name="frmCadastro" method="post" >
                    
                     <div class="campos">
                         <div class="cadastroInformacoesPessoais">
@@ -138,6 +147,9 @@ if(isset($_SESSION['cliente']))
                         </div>
                         <div class="cadastroEntradaDeDados">
                             <input type="file" name="fleFoto" accept="image/jpeg, image/jpg, image/png">
+                        </div>
+                        <div id="visualizarFoto">
+                           <img src="<?=NOME_DIRETORIO_FILE.$foto?>">
                         </div>
                     </div>
                 <div class="campos">
@@ -219,53 +231,60 @@ if(isset($_SESSION['cliente']))
                 </form>
             </div>
         </div>
-        <div id="consultaDeDados">
-            <table id="tblConsulta" >
-                <tr>
-                    <td id="tblTitulo" colspan="5">
-                        <h1> Consulta de Dados.</h1>
-                    </td>
-                </tr>
-                <tr id="tblLinhas">
-                    <td class="tblColunas destaque"> Nome </td>
-                    <td class="tblColunas destaque"> Celular </td>
-                    <td class="tblColunas destaque"> Email </td>
-                    <td class="tblColunas destaque"> Opções </td>
-                </tr>
- 
-                <?php
-                 $dadosClientes = exibirClientes();
+<div id="consultaDeDados">
+    <table id="tblConsulta">
+        <tr>
+            <td id="tblTitulo" colspan="6">
+                <h1> Consulta de Dados.</h1>
+            </td>
+        </tr>
+        <tr id="tblLinhas">
+            <td class="tblColunas destaque"> Nome </td>
+            <td class="tblColunas destaque"> Celular </td>
+            <td class="tblColunas destaque"> Email </td>
+            <td class="tblColunas destaque"> Foto </td>
+            <td class="tblColunas destaque"> Opções </td>
+        </tr>
+
+        <?php
+        $dadosClientes = exibirClientes();
 
 
-                  while($rsClientes = mysqli_fetch_assoc($dadosClientes))
-                  {
+        while($rsClientes = mysqli_fetch_assoc($dadosClientes))
+        {
 
-                  
-
-
-                 ?>
+        
 
 
-                <tr id="tblLinhas">
-                    <td class="tblColunas registros"><?=$rsClientes['nome']?></td>
-                    <td class="tblColunas registros"><?=$rsClientes['celular']?></td>
-                    <td class="tblColunas registros"><?=$rsClientes['email']?></td>
-                    <td class="tblColunas registros">
-                        <a href="controles/editarDados.php?id=<?=$rsClientes['idCliente']?>">
-                        <img src="css/img/edit.png" alt="Editar" title="Editar" class="editar">
-                        </a>
-                        <a onclick="return confirm('Tem Certeza, que deseja Excluir?');"  href="controles/excluiDadosClientes.php?id=<?=$rsClientes['idCliente']?>">
-                        <img src="css/img/trash.png" alt="Excluir" title="Excluir" class="excluir">
-                        </a>
-                        <img src="css/img/search.png" alt="Visualizar" title="Visualizar" class="pesquisar" data-id="<?=$rsClientes['idCliente']?>">
-                    </td>
-                </tr>
-                <?php
-                    }
-                  ?>
-            </table>
-        </div>
-        <div id="baixo"> <span>Copyright &copy;2021 | Luan Ferrasin </span>
-      </div>
-    </body>
+        ?>
+
+
+        <tr id="tblLinhas">
+            <td class="tblColunas registros"><?=$rsClientes['nome']?></td>
+            <td class="tblColunas registros"><?=$rsClientes['celular']?></td>
+            <td class="tblColunas registros"><?=$rsClientes['email']?></td>
+            <td class="tblColunas registros">
+                <img class="foto" src="<?=NOME_DIRETORIO_FILE.$rsClientes['foto']?>">
+            </td>
+            <td class="tblColunas registros">
+                <a href="controles/editarDados.php?id=<?=$rsClientes['idCliente']?>">
+                    <img src="css/img/edit.png" alt="Editar" title="Editar" class="editar">
+                </a>
+                <a onclick="return confirm('Tem Certeza, que deseja Excluir?');"
+                    href="controles/excluiDadosClientes.php?id=<?=$rsClientes['idCliente']?>&foto=<?=$rsClientes['foto']?>">
+                    <img src="css/img/trash.png" alt="Excluir" title="Excluir" class="excluir">
+                </a>
+                <img src="css/img/search.png" alt="Visualizar" title="Visualizar" class="pesquisar"
+                    data-id="<?=$rsClientes['idCliente']?>">
+            </td>
+        </tr>
+        <?php
+        }
+        ?>
+    </table>
+</div>
+<div id="baixo"> <span>Copyright &copy;2021 | Luan Ferrasin </span>
+</div>
+</body>
+
 </html>

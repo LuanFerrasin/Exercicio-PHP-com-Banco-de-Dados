@@ -14,6 +14,8 @@ require_once('../functions/config.php');
 //Import do Arquivo parar inserir no Banco de Dados
 require_once(SRC.'bd/inserirCliente.php');
 require_once(SRC.'bd/atualizarCliente.php');
+//Chamando o Arquivo que faz o Upload de imagens para o Servidor
+require_once(SRC.'functions/upload.php');
 
  //Declarando Variáveis
 $nome = (String) null;
@@ -24,6 +26,10 @@ $celular = (String) null;
 $email = (String) null;
 $obs = (String) null;
 $idEstado = (int) null;
+//criando a variavel para guardar o nome das imagens
+$foto =  (string) null;
+
+
 
 //Validacao para saber se o id do registro está chegando pela URL (modo para editar registro)
 if(isset ($_GET['id']))
@@ -46,6 +52,28 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
   $email = $_POST['txtEmail'];
   $obs = $_POST['txtObs'];
   $idEstado = $_POST['sltEstado'];
+  //Esse nomeFoto está chegando através do Action do Form da Index, motivo dessa váriavel é para concluir o editar com o upload de fotos  
+  $nomeFoto = $_GET['nomeFoto'];
+
+  if(strtoupper($_GET['modo']) == 'ATUALIZAR')
+  {
+    if($_FILES['fleFoto']['name'] != "")
+    {
+
+  //chama a função que faz o Upload de um Arquivo (nesse caso, imagem)
+   $foto = uploadFile($_FILES['fleFoto']);
+   //Apaga a imagem antiga 
+    unlink(SRC.NOME_DIRETORIO_FILE.$nomeFoto);
+
+    }
+    else{
+      $foto = $nomeFoto;
+    }
+  }
+  else 
+  {
+    $foto = uploadFile($_FILES['fleFoto']);
+  }
 
   if ($nome == null  || $rg == null || $cpf == null)
     echo("<script>
@@ -75,7 +103,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
           "email" => $email,
           "obs" => $obs,
           "id" => $id,
-          "idEstado" => $idEstado
+          "idEstado" => $idEstado,
+          "foto" => $foto
         );
 
     //Validação para saber se é para inserir no Registro ou se é para Atualizar o Registro existente no BD 

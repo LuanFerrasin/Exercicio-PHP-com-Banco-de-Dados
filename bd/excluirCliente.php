@@ -11,6 +11,7 @@ require_once('../bd/conexaoMySql.php');
   {
   $sql = "delete from tblcliente where idCliente = ".$idCliente;
 
+  
         $conexao = conexaoMySql();
 
         if (mysqli_query($conexao, $sql))

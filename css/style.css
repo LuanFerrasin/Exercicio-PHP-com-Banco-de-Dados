@@ -92,7 +92,7 @@ input[type=email]:hover{
     height: 50px;
     background-color: black;
     color: white;
-    margin-top: 30px;
+    margin-top: 15px;
     font-size: 1.2em;
 }
 
@@ -232,5 +232,20 @@ input[type=email]:hover{
     margin: auto;
     
 }
-
+.foto{
+    width: 80px;
+    height: 80px;
+}
+#visualizarFoto{
+    width: 300px;
+    height: 200px;
+    background-color: azure;
+    position: relative;
+    right: -200;
+    
+}
+#visualizarFoto img{
+    width: inherit;
+    height: inherit;
+}
 
