@@ -52,6 +52,23 @@ function buscar ($idCliente)
 
 }
 
+function buscarNome($nome) {
+    $sql = "select tblcliente.*,tblEstado.sigla 
+    from tblcliente
+    inner join tblEstado
+    on tblEstado.idEstado = tblcliente.idEstado
+    where tblcliente.nome like '%".$nome."%'";
+
+    $conexao = conexaoMySql();
+    // Abre a conexão com o Banco de Dados
+
+
+    //Solicita ao BD a execução do Script SQL
+    $select = mysqli_query($conexao, $sql);
+
+    return $select;
+
+}
 
 
 

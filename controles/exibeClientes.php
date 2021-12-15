@@ -68,6 +68,15 @@
             return false;
     }
 
+// Função para buscar dados do Banco de Dados com Filtro pelo nome.
+
+    //Retorna a Lista de registros existentes no Banco de Dados
+    function buscarNomeCliente($nome)
+    {
+        $dados = buscarNome($nome);
+
+        return $dados;
+    }
  
 
 ?>

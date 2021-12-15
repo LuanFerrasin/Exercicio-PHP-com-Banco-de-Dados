@@ -29,10 +29,33 @@
         require_once('../functions/config.php');
         require_once('../controles/exibeClientes.php');
 
+        //Valida a existencia  da chegada de dados como parametro
+        //Parametro parar filtrar pelo nome
+        if (isset($request->getQueryParams()['nome']))
+        {
+        /***Recebendo dados pela queryString***/
+
+            $nome = (string) null;
+
+            $nome = $request->getQueryParams()['nome'];
+
+            if ($listDados = buscarNomeCliente($nome))
+                if ($listDadosArray = criarArray($listDados))
+                    $listDadosJSON = criarJSON($listDadosArray);
+
+        }else
+        {
+
+
+            
+
+        /************************************ */
+
         // Chama a função (na pasta controles) que vai requisitar os dados do BD
         if ($listDados = exibirClientes())
-        if($listDadosArray = criarArray($listDados))
-        $listDadosJSON = criarJSON($listDadosArray);
+            if ($listDadosArray = criarArray($listDados))
+                $listDadosJSON = criarJSON($listDadosArray);
+        }
 
         // Validação para tratar BD sem dados
         if ($listDadosArray) {
